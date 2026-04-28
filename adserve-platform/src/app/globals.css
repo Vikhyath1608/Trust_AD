@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root { font-family: 'DM Sans', sans-serif; -webkit-font-smoothing: antialiased; }
+  body {
+    background: #07070d;
+    color: #eeeef6;
+    background-image:
+      radial-gradient(ellipse 90% 60% at 50% -5%, rgba(139,92,246,0.07) 0%, transparent 65%),
+      linear-gradient(rgba(139,92,246,0.022) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(139,92,246,0.022) 1px, transparent 1px);
+    background-size: auto, 44px 44px, 44px 44px;
+  }
+}
+
+@layer components {
+  /* Glass */
+  .glass { @apply bg-ink-1/80 backdrop-blur-2xl border border-edge-1; }
+  .glass-raised { @apply bg-ink-2/90 backdrop-blur-2xl border border-edge-2 shadow-card; }
+
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2
+           px-4 py-2 rounded-lg text-sm font-medium
+           transition-all duration-200 cursor-pointer select-none
+           disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+  .btn-primary  { @apply btn bg-violet-500 hover:bg-violet-600 text-white shadow-glow-v hover:shadow-none active:scale-95; }
+  .btn-secondary{ @apply btn bg-ink-3 hover:bg-ink-4 text-word-1 border border-edge-2 active:scale-95; }
+  .btn-ghost    { @apply btn bg-transparent hover:bg-ink-3 text-word-2 hover:text-word-1 active:scale-95; }
+  .btn-danger   { @apply btn text-coral-400 border border-coral-400/20 active:scale-95; background: rgba(239,68,68,0.08); }
+  .btn-danger:hover { background: rgba(239,68,68,0.16); }
+  .btn-sm   { @apply btn px-3 py-1.5 text-xs; }
+  .btn-icon { @apply btn p-2 rounded-lg; }
+
+  /* Form */
+  .field-input {
+    @apply w-full bg-ink-3 border border-edge-2 rounded-lg px-3 py-2.5 text-sm text-word-1
+           placeholder:text-word-3 focus:outline-none focus:border-violet-500/60
+           focus:ring-2 focus:ring-violet-500/10 transition-all duration-200;
+  }
+  .field-label { @apply block text-xs font-medium text-word-2 mb-1.5 tracking-wide; }
+  .field-error { @apply text-xs text-coral-400 mt-1; }
+
+  /* Cards */
+  .card      { @apply bg-ink-2 border border-edge-1 rounded-xl p-5 transition-all duration-200; }
+  .card-hover{ @apply card hover:border-edge-2 hover:shadow-card hover:-translate-y-0.5; }
+  .stat-card { @apply card relative overflow-hidden; }
+  .stat-card::before {
+    content: '';
+    @apply absolute inset-x-0 top-0 h-px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+  }
+
+  /* Badges */
+  .badge        { @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium border; }
+  .badge-green  { @apply badge bg-jade-400/10  text-jade-400  border-jade-400/20; }
+  .badge-red    { @apply badge bg-coral-400/10 text-coral-400 border-coral-400/20; }
+  .badge-violet { @apply badge bg-violet-400/10 text-violet-300 border-violet-400/20; }
+  .badge-sun    { @apply badge bg-sun-400/10   text-sun-400   border-sun-400/20; }
+  .badge-sky    { @apply badge bg-sky-400/10   text-sky-400   border-sky-400/20; }
+  .badge-muted  { @apply badge bg-ink-4 text-word-3 border-edge-1; }
+
+  /* Skeleton */
+  .skeleton {
+    background: linear-gradient(90deg, #161626 25%, #1c1c30 50%, #161626 75%);
+    background-size: 600px 100%;
+    @apply rounded-lg animate-shimmer;
+  }
+
+  /* Tabs */
+  .tab-bar  { @apply flex gap-1 p-1 bg-ink-2 border border-edge-1 rounded-xl w-fit; }
+  .tab-item { @apply px-4 py-1.5 rounded-lg text-sm font-medium text-word-2 hover:text-word-1 cursor-pointer transition-all duration-200; }
+  .tab-item.active { @apply bg-ink-4 text-word-1; box-shadow: 0 1px 6px rgba(0,0,0,0.4); }
+
+  /* Pipeline */
+  .pipe-icon {
+    @apply w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 border;
+  }
+  .pipe-icon.idle    { @apply bg-ink-3 border-edge-1 text-word-3; }
+  .pipe-icon.running { @apply bg-violet-500/15 border-violet-500/40 text-violet-400 animate-pulse-glow; }
+  .pipe-icon.done    { @apply bg-jade-400/10 border-jade-400/30 text-jade-400; }
+  .pipe-icon.error   { @apply bg-coral-400/10 border-coral-400/30 text-coral-400; }
+
+  /* Score bar */
+  .score-track { @apply h-1.5 rounded-full bg-ink-4 overflow-hidden; }
+  .score-fill  { @apply h-full rounded-full transition-all duration-700 ease-out; }
+
+  /* Table */
+  .data-table { @apply w-full border-collapse; }
+  .data-table th { @apply text-left text-xs font-semibold text-word-3 uppercase tracking-wider px-4 py-3 border-b border-edge-1; }
+  .data-table td { @apply px-4 py-3 text-sm text-word-1 border-b border-edge-1/60 align-middle; }
+  .data-table tbody tr { @apply transition-colors duration-150; }
+  .data-table tbody tr:hover td { @apply bg-ink-3/50; }
+  .data-table tbody tr:last-child td { @apply border-b-0; }
+
+  /* Modal */
+  .modal-backdrop { @apply fixed inset-0 bg-canvas/80 backdrop-blur-sm z-50 flex items-center justify-center p-4; }
+  .modal-panel    { @apply bg-ink-2/90 backdrop-blur-2xl border border-edge-2 shadow-card rounded-2xl w-full max-w-xl animate-scale-in max-h-[90vh] overflow-y-auto; }
+
+  /* Nav */
+  .nav-link { @apply flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-word-2 hover:text-word-1 hover:bg-ink-3 transition-all duration-150 cursor-pointer border border-transparent; }
+  .nav-link.active { @apply bg-violet-500/10 text-violet-300 border-violet-500/20; }
+
+  /* Ad card */
+  .ad-card { @apply bg-ink-2 border border-edge-1 rounded-xl overflow-hidden transition-all duration-200 hover:border-edge-2 hover:-translate-y-0.5; }
+  .ad-card:hover { box-shadow: 0 8px 40px rgba(0,0,0,0.5); }
+}
+
+@layer utilities {
+  .text-gradient      { @apply bg-gradient-to-r from-violet-300 via-violet-400 to-sky-400 bg-clip-text text-transparent; }
+  .text-gradient-gold { @apply bg-gradient-to-r from-sun-400 to-sun-500 bg-clip-text text-transparent; }
+  .stagger-1 { animation-delay:  50ms; }
+  .stagger-2 { animation-delay: 100ms; }
+  .stagger-3 { animation-delay: 150ms; }
+  .stagger-4 { animation-delay: 200ms; }
+  .stagger-5 { animation-delay: 250ms; }
+  .stagger-6 { animation-delay: 300ms; }
+}
